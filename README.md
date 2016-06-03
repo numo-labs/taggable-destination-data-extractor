@@ -116,3 +116,19 @@ we only want to save the *first* one as `.csv`
 Thankfully, we've done this [*before*](https://github.com/numo-labs/taggable-master-hotel-mapping-script/blob/master/lib/parse_master_hotel_records_csv_dump_script.js)
 so we can re-cycle code:
 http://stackoverflow.com/questions/36288375/how-to-parse-csv-data-that-contains-newlines-in-field-using-javascript
+
+Run the following script:
+
+```js
+npm run extract
+```
+
+### Step 4 - Attach the Geonames Tag to each Tile
+
+Finally run the `transform` script:
+
+```js
+npm run transform
+```
+
+Done.
