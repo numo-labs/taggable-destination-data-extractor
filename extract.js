@@ -7,7 +7,6 @@ var csvString, rows;
  * first extract the Name and Location (Latitude & Longitude) from Areas
  * see readme for column indexes
  */
-
 csvString = fs.readFileSync('./rawdata/' + files[0] +'.csv').toString();
 rows = CSVToArray(csvString); // parse the .csv file into an Array of Arrays
 rows.shift(); // get rid of column names.
@@ -54,12 +53,10 @@ rows.forEach(function (row) {
   }
   images[ row[1] ][ row[6] ].push(row[2].trim());
 });
-// console.log(images);
 
+var bestImage = {};
 // even though we have lots of images, we are only going to use one!
 // I know, its madness! see:
-var bestImage = {};
-
 Object.keys(images).filter( function(id) {
   var imgids = Object.keys(images[id]).map(function (id) {
     return parseInt(id, 10);
@@ -69,8 +66,9 @@ Object.keys(images).filter( function(id) {
   bestImage[id] = images[ id ][ imgids[0] ][0];
 })
 
-
-
+/**
+ * fially, extract the text
+ */
 csvString = fs.readFileSync('./rawdata/' + files[2] +'.csv').toString();
 rows = CSVToArray(csvString); // parse the .csv file into an Array of Arrays
 rows.shift(); // don't need the column names (see readme if you want them)
@@ -82,15 +80,6 @@ rows.forEach(function (row) {
     text[ row[1] ] = text[ row[1] ] + '<br />' + row[5];
   }
 });
-
-// var indexes = [];
-// var columns = rows[0]
-// columns.forEach(function(col, index) {
-//   indexes.push(index);
-// });
-// console.log('| Index: | ' + indexes.join(' | ') + ' |');
-// console.log('| Column Name: | ' + columns.join(' | ') + ' |');
-
 
 Object.keys(tiles).forEach(function (id) {
   tiles[id]['content'][0]['sections'].push({

@@ -21,7 +21,6 @@ This project (*script*) performs the following steps:
 + tags each destination tile with the relevant Geonames tag
 (*so that it will appear in the search results when people search for that location*)
 
-
 ## How?
 
 ### tl;dr
@@ -29,7 +28,20 @@ This project (*script*) performs the following steps:
 
 ### *Required* Environment Variables
 
+In order to save the Destination Tiles to S3 (_via_ [`lambda-taggable-createDocument`](https://github.com/numo-labs/lambda-taggable-createDocument) )
+you will need to have the following Environment variables:
 
+```sh
+export AWS_REGION=eu-west-1
+export AWS_IAM_ROLE=arn:aws:iam::847002989232:role/lambdafull
+export AWS_ACCESS_KEY_ID=yourId
+export AWS_SECRET_ACCESS_KEY=yourKey
+```
+> get them from CodeShip: https://codeship.com/projects/149758/configure_environment
+
+Either *export* the Environment Variables
+***or*** create a file called `.env` in the root of the project
+and paste them into the file.
 
 
 <br />
@@ -47,23 +59,37 @@ Jesper sent us 3 excel files:
 
 ![numo-destination-files](https://cloud.githubusercontent.com/assets/194400/15782076/bd0edf3e-29a0-11e6-9f4c-27484c96a7eb.png)
 
-#### IS - Areas DA v1.xlsx
+#### IS - Areas DA v1.xlsx (Location Info)
 
 Contains the name of the area, a Hotel ID and Lat/Lon info
 
 ![numo-areas](https://cloud.githubusercontent.com/assets/194400/15782213/5022c2a4-29a1-11e6-80dc-470d5f7d70df.png)
 
-#### IS - Area texts DA v1.xlsx
+| Index: | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+|--------|---|---|---|---|---|---|---|---|---|
+| Column Name: | AreaName | WVitemID | CAitemID | Latitude | Longitude | ExtentLatMin | ExtentLongMin | ExtentLatMax | ExtentLongMax |
+
+#### IS - Area texts DA v1.xlsx (Text)
 
 Contains the text content
 
 ![numo-destinations-area-text](https://cloud.githubusercontent.com/assets/194400/15782439/3a993b74-29a2-11e6-8046-c64abd03a0f3.png)
 
-#### IS - Area images DA v1.xlsx
+| Index: | 0 | 1 | 2 | 3 | 4 | 5 |
+|--------|---|---|---|---|---|---|
+| Column Name: | AreaName | WVitemID | TextTypeID | TextType | SortOrder | Text |
+
+#### IS - Area images DA v1.xlsx (Images)
 
 Contains a list of images for a given area/hotel
 
 ![numo-area-images](https://cloud.githubusercontent.com/assets/194400/15782092/d0740252-29a0-11e6-87f6-683cf418f660.png)
+
+| Index: | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+|--------|---|---|---|---|---|---|---|---|---|
+| Column Name: | AreaName | WVitemID | ImageURL | ScreenSizeID | SortOrder | ScreenSizeName | Width | Height | ImageText |
+
+<br />
 
 ### Step 2 - Export the `.xlsx` files as `.csv`
 
@@ -80,14 +106,12 @@ we only want to save the *first* one as `.csv`
 
 ![excel-save-active-sheet](https://cloud.githubusercontent.com/assets/194400/15784239/94936c1a-29a9-11e6-9c5f-ec0f06112e0d.png)
 
-> Obviously, Microsoft does not *want* you to export the data *out* of Excel,
-> they can't *charge* you license fees for manipulating data using JS scripts...
-
+> Don't worry, Redmond, we *know* what we're doing...
 
 ![excel-save-darnit](https://cloud.githubusercontent.com/assets/194400/15784781/f819b04e-29ab-11e6-8037-7543e1b3da25.png)
 
 
-### Step 3 - Parse the `.csv` files into a *useable* format > `.json`s
+### Step 3 - Parse the `.csv` files into a *useable* format > `.json`
 
 Thankfully, we've done this [*before*](https://github.com/numo-labs/taggable-master-hotel-mapping-script/blob/master/lib/parse_master_hotel_records_csv_dump_script.js)
 so we can re-cycle code:
