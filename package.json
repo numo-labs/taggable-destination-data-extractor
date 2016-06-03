@@ -7,7 +7,13 @@
     "url": "https://github.com/numo-labs/taggable-destination-data-extractor.git"
   },
   "dependencies": {
-    "aws-sdk": "^2.3.17"
+    "aws-sdk": "^2.3.17",
+    "env2": "^2.1.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "extract": "node lib/extract.js",
+    "transform": "node lib/transform.js",
+    "load": "node lib/load.js"
+  }
 }
