@@ -132,3 +132,9 @@ npm run transform
 ```
 
 Done.
+
+> Visit the article editor and you should expect to see:
+
+![destiny-destination-tiles-imported](https://cloud.githubusercontent.com/assets/194400/15795831/3c48ade2-29ed-11e6-8bb7-6f1381cdd70c.png)
+
+![desinty-showing-geo-tag](https://cloud.githubusercontent.com/assets/194400/15795830/3c1ea682-29ed-11e6-9278-0851dc13798f.png)
