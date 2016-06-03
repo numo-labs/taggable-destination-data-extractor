@@ -1,0 +1,12 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "Extract the destination data from Excel (3 spreadsheets), link it to Master Hotel and insert into S3 for indexing.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/numo-labs/taggable-destination-data-extractor.git"
+  },
+  "dependencies": {
+    "perma": "^2.0.1"
+  }
+}
