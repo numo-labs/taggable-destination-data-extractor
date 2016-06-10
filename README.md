@@ -138,3 +138,17 @@ Done.
 ![destiny-destination-tiles-imported](https://cloud.githubusercontent.com/assets/194400/15795831/3c48ade2-29ed-11e6-8bb7-6f1381cdd70c.png)
 
 ![desinty-showing-geo-tag](https://cloud.githubusercontent.com/assets/194400/15795830/3c1ea682-29ed-11e6-9278-0851dc13798f.png)
+
+
+### Links ...?
+
+The Destination Content provided by Jesper includes links.
+
+These can be viewed by inspecting the Destination Text Content in the `IS - Area texts DA v1.xlsx` spreadsheet:
+![links-in-destination-text](https://cloud.githubusercontent.com/assets/194400/15898708/2edc82e4-2d91-11e6-84c3-eb3a9aea0d8a.png)
+
+Sadly, these links are *relative* to the Spies.dk site and cannot be resolved by our UI.
+
+The simple solution was to *remove* the links from the text using a *regular* expression.
+
+See: https://github.com/numo-labs/taggable-destination-data-extractor/issues/4

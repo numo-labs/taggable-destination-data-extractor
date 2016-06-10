@@ -14,6 +14,11 @@
   "scripts": {
     "extract": "node lib/extract.js",
     "transform": "node lib/transform.js",
-    "load": "node lib/load.js"
+    "load": "node lib/load.js",
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha test/ --report lcov -- -R spec"
+  },
+  "devDependencies": {
+    "istanbul": "^0.4.3",
+    "mocha": "^2.5.3"
   }
 }
